@@ -1371,15 +1371,15 @@ defmodule Req.Steps do
     end
   end
 
-  defp get_retry_delay(request, %Req.Response{status: 429} = response, retry_count) do
-    case Req.Response.get_header(response, "retry-after") do
-      [delay] ->
-        {request, retry_delay_in_ms(delay)}
+  # defp get_retry_delay(request, %Req.Response{status: 429} = response, retry_count) do
+  #   case Req.Response.get_header(response, "retry-after") do
+  #     [delay] ->
+  #       {request, retry_delay_in_ms(delay)}
 
-      [] ->
-        calculate_retry_delay(request, retry_count)
-    end
-  end
+  #     [] ->
+  #       calculate_retry_delay(request, retry_count)
+  #   end
+  # end
 
   defp get_retry_delay(request, _response, retry_count) do
     calculate_retry_delay(request, retry_count)
